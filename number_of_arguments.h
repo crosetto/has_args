@@ -12,7 +12,7 @@ struct has_args {
     struct derived : Functor{};
 
   template <typename Derived , int ... Args>
-  static auto test(Derived, decltype(val(std::declval<Derived>().Do( Args ... ))), std::integer_sequence<int, Args ...>){
+  static auto test(Derived, decltype(val((std::declval<Derived>()( Args ... ),0))), std::integer_sequence<int, Args ...>){
           return std::true_type{};
       };
 

@@ -2,21 +2,21 @@
 
 struct func {
   func(int &arg) : arg{arg} {}
-  template <typename T> int Do(T) {}
+  template <typename T> int operator()(T) {}
   int &arg;
 };
 
 struct func2 {
-  template <typename T1, typename T2> int Do(T1, T2) const {}
+  template <typename T1, typename T2> int operator()(T1, T2) const {}
 };
 
 struct func3 {
-  template <typename T1, typename T2, typename T3> int Do(T1, T2, T3) {}
+  template <typename T1, typename T2, typename T3> int operator()(T1, T2, T3) {}
 };
 
 struct func4 {
   template <typename T1, typename T2, typename T3, typename T4>
-  int Do(T1, T2, T3, T4) {}
+  int operator()(T1, T2, T3, T4) {}
 };
 
 int main() {
@@ -33,6 +33,6 @@ int main() {
   static_assert(has_args<3, decltype(f)>::type::value == true, "error");
 
   auto lambda=[](auto arg){};
-  // static_assert(has_args<1, decltype(lambda)>::type::value == true, "error"); // error here
+  static_assert(has_args<1, decltype(lambda)>::type::value == true, "error");
 
 }
