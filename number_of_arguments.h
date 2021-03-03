@@ -4,7 +4,7 @@
 #include <utility>
 
 template < typename T >
-int val (T const &, int){return 0;};
+int val (T const &){return 0;};
 
 template <int N, typename Functor>
 struct has_args {
@@ -12,7 +12,7 @@ struct has_args {
     struct derived : Functor{};
 
   template <typename Derived , int ... Args>
-  static auto test(Derived, decltype(val(std::declval<Derived>().Do( Args ... ), 0)), std::integer_sequence<int, Args ...>){
+  static auto test(Derived, decltype(val(std::declval<Derived>().Do( Args ... ))), std::integer_sequence<int, Args ...>){
           return std::true_type{};
       };
 
